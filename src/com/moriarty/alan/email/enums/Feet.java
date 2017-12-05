@@ -1,4 +1,4 @@
-package com.moriarty.alan.data;
+package com.moriarty.alan.email.enums;
 
 public enum Feet {
 	LEFT("Left"), RIGHT("Right");

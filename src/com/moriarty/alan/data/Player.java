@@ -3,11 +3,14 @@ package com.moriarty.alan.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.moriarty.alan.email.enums.QualityRatings;
+
 public class Player {
 	private int age;
 	private int height;
 	private int weight;
 	private String club;
+	private String emailAddress;
 	private String name;
 	private String position;
 	private String preferredFoot;
@@ -43,6 +46,14 @@ public class Player {
 
 	public void setClub(String club) {
 		this.club = club;
+	}
+	
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+	
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
 	public String getName() {
@@ -86,6 +97,17 @@ public class Player {
 		for (double rating : ratings)
 			ratingTotal += rating;
 		return ratingTotal;
+	}
+	
+	public String determineQuality() {
+		double averageRating = calculateAverageRating();
+    	if (averageRating >= QualityRatings.WORLD_CLASS.getMinimumAverageRating())
+    		return QualityRatings.WORLD_CLASS.name();
+    	if (averageRating >= QualityRatings.GOOD.getMinimumAverageRating())
+    		return QualityRatings.GOOD.name();
+    	if (averageRating >= QualityRatings.AVERAGE.getMinimumAverageRating())
+    		return QualityRatings.AVERAGE.name();
+		return QualityRatings.ABYSMAL.name();
 	}
 
 	public String getPlayerSummary() {
